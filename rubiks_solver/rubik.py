@@ -4,7 +4,6 @@
 # Last updated: October 24, 2008
 # Updated for python3: Saif Masoud, September 2020
 # Routines to work with Rubik's 2x2x2 cube
-
 """
 We'll call the six sides, as usual:
    Front Back   Up Down   Left Right
@@ -56,7 +55,7 @@ ryg = fdl = 6  # (2-nd cubie; front face)
 ygr = dlf = 7  # (2-nd cubie; down face)
 gry = lfd = 8  # (2-nd cubie; left face)
 
-rby = frd = 9   #  (3-rd cubie; front face)
+rby = frd = 9  #  (3-rd cubie; front face)
 byr = rdf = 10  # (3-rd cubie; right face)
 yrb = dfr = 11  # (3-rd cubie; down face)
 
@@ -76,6 +75,42 @@ oyb = bdr = 21  # (7-th cubie; back face)
 ybo = drb = 22  # (7-th cubie; down face)
 boy = rbd = 23  # (7-th cubie; right face)
 
+three_color_to_index = {
+    "rgw": 0,
+    "gwr": 1,
+    "wrg": 2,
+    "rwb": 3,
+    "wbr": 4,
+    "brw": 5,
+    "ryg": 6,
+    "ygr": 7,
+    "gry": 8,
+    "rby": 9,
+    "byr": 10,
+    "yrb": 11,
+    "owg": 12,
+    "wgo": 13,
+    "gow": 14,
+    "obw": 15,
+    "bwo": 16,
+    "wob": 17,
+    "ogy": 18,
+    "gyo": 19,
+    "yog": 20,
+    "oyb": 21,
+    "ybo": 22,
+    "boy": 23,
+}
+
+rgb_to_one_char_color = {
+    "rgb(255, 255, 0)": "y",
+    "rgb(255, 0, 0)": "r",
+    "rgb(0, 255, 0)": "g",
+    "rgb(0, 0, 255)": "b",
+    "rgb(255, 255, 255)": "w",
+    "rgb(255, 165, 0)": "o",
+}
+
 """
 A permutation p on 0,1,...,n-1 is represented as
 a list of length n-1.  p[i] = j means of course
@@ -94,6 +129,7 @@ the color at position j moves to position i.
 ### Permutation operations
 ####################################################
 
+
 def perm_apply(perm, position):
     """
     Apply permutation perm to a list position (e.g. of faces).
@@ -101,15 +137,17 @@ def perm_apply(perm, position):
     """
     return tuple([position[i] for i in perm])
 
+
 def perm_inverse(p):
     """
     Return the inverse of permutation p.
     """
     n = len(p)
-    q = [0]*n
+    q = [0] * n
     for i in range(n):
         q[p[i]] = i
     return tuple(q)
+
 
 def perm_to_string(p):
     """
@@ -117,16 +155,42 @@ def perm_to_string(p):
     than list prin(ing.
     """
     s = "("
-    for x in p: s = s + "%2d "%x
+    for x in p:
+        s = s + "%2d " % x
     s += ")"
     return s
+
 
 ###################################################
 ### Make standard permutations of faces
 ###################################################
 # Identity: equal to (0, 1, 2, ..., 23).
-I = (flu, luf, ufl, fur, urf, rfu, fdl, dlf, lfd, frd, rdf, dfr,     bul, ulb, lbu, bru, rub, ubr, bld, ldb, dbl, bdr, drb, rbd)
-
+I = (
+    flu,
+    luf,
+    ufl,
+    fur,
+    urf,
+    rfu,
+    fdl,
+    dlf,
+    lfd,
+    frd,
+    rdf,
+    dfr,
+    bul,
+    ulb,
+    lbu,
+    bru,
+    rub,
+    ubr,
+    bld,
+    ldb,
+    dbl,
+    bdr,
+    drb,
+    rbd,
+)
 """
 When any of the following Rubik's cube permutations are applied, the
 three faces on a cubie naturally stay together:
@@ -134,20 +198,92 @@ three faces on a cubie naturally stay together:
 """
 
 # Front face rotated clockwise.
-F = (fdl, dlf, lfd, flu, luf, ufl, frd, rdf, dfr, fur, urf, rfu, 
-     bul, ulb, lbu, bru, rub, ubr, bld, ldb, dbl, bdr, drb, rbd)
+F = (
+    fdl,
+    dlf,
+    lfd,
+    flu,
+    luf,
+    ufl,
+    frd,
+    rdf,
+    dfr,
+    fur,
+    urf,
+    rfu,
+    bul,
+    ulb,
+    lbu,
+    bru,
+    rub,
+    ubr,
+    bld,
+    ldb,
+    dbl,
+    bdr,
+    drb,
+    rbd,
+)
 # Front face rotated counter-clockwise.
 Fi = perm_inverse(F)
 
 # Left face rotated clockwise.
-L = (ulb, lbu, bul, fur, urf, rfu, ufl, flu, luf, frd, rdf, dfr,
-     dbl, bld, ldb, bru, rub, ubr, dlf, lfd, fdl, bdr, drb, rbd)
+L = (
+    ulb,
+    lbu,
+    bul,
+    fur,
+    urf,
+    rfu,
+    ufl,
+    flu,
+    luf,
+    frd,
+    rdf,
+    dfr,
+    dbl,
+    bld,
+    ldb,
+    bru,
+    rub,
+    ubr,
+    dlf,
+    lfd,
+    fdl,
+    bdr,
+    drb,
+    rbd,
+)
 # Left face rotated counter-clockwise.
 Li = perm_inverse(L)
 
 # Upper face rotated clockwise.
-U = (rfu, fur, urf, rub, ubr, bru, fdl, dlf, lfd, frd, rdf, dfr,
-     luf, ufl, flu, lbu, bul, ulb, bld, ldb, dbl, bdr, drb, rbd)
+U = (
+    rfu,
+    fur,
+    urf,
+    rub,
+    ubr,
+    bru,
+    fdl,
+    dlf,
+    lfd,
+    frd,
+    rdf,
+    dfr,
+    luf,
+    ufl,
+    flu,
+    lbu,
+    bul,
+    ulb,
+    bld,
+    ldb,
+    dbl,
+    bdr,
+    drb,
+    rbd,
+)
 # Upper face rotated counter-clockwise.
 Ui = perm_inverse(U)
 
@@ -156,30 +292,32 @@ Ui = perm_inverse(U)
 quarter_twists = (F, Fi, L, Li, U, Ui)
 
 quarter_twists_names = {}
-quarter_twists_names[F] = 'F'
-quarter_twists_names[Fi] = 'Fi'
-quarter_twists_names[L] = 'L'
-quarter_twists_names[Li] = 'Li'
-quarter_twists_names[U] = 'U'
-quarter_twists_names[Ui] = 'Ui'
+quarter_twists_names[F] = "F"
+quarter_twists_names[Fi] = "Fi"
+quarter_twists_names[L] = "L"
+quarter_twists_names[Li] = "Li"
+quarter_twists_names[U] = "U"
+quarter_twists_names[Ui] = "Ui"
 
-# Names to permutation 
+# Names to permutation
 names_quarter_twists = {}
-names_quarter_twists['F'] = F
-names_quarter_twists['Fi'] = Fi
-names_quarter_twists['L'] = L
-names_quarter_twists['Li'] = Li
-names_quarter_twists['U'] = U
-names_quarter_twists['Ui'] = Ui
+names_quarter_twists["F"] = F
+names_quarter_twists["Fi"] = Fi
+names_quarter_twists["L"] = L
+names_quarter_twists["Li"] = Li
+names_quarter_twists["U"] = U
+names_quarter_twists["Ui"] = Ui
+
 
 def input_configuration():
     """
     Prompts a user to input the current configuration of the cube, and
     translates that into a permutation.
     """
-    position = [-1]*24
+    position = [-1] * 24
 
-    cubie = input("""
+    cubie = input(
+        """
     Look for the cubie with yellow, blue, and orange faces (it has the
     Rubiks mark). Put this cubie in the lower-back-right corner with
     the yellow face down. We will call this cubie #7.
@@ -188,55 +326,69 @@ def input_configuration():
     this cubie #0. Starting with its front face, and going clockwise,
     input the colors of the faces (e.g. yob, if the colors are yellow,
     orange, and blue):
-    cubie #0: """)
+    cubie #0: """
+    )
     position[0] = eval(cubie)
     position[1] = eval(cubie[1:] + cubie[0])
     position[2] = eval(cubie[2] + cubie[:2])
-    cubie = input("""
+    cubie = input(
+        """
     Now enter cubie #1, which is to the right of cubie #0, again
     starting with the front face and going clockwise:
-    cubie #1: """)
+    cubie #1: """
+    )
     position[3] = eval(cubie)
     position[4] = eval(cubie[1:] + cubie[0])
     position[5] = eval(cubie[2] + cubie[:2])
-    cubie = input("""
+    cubie = input(
+        """
     Now enter cubie #2, which is beneath cubie #0:
-    cubie #2: """)
+    cubie #2: """
+    )
     position[6] = eval(cubie)
     position[7] = eval(cubie[1:] + cubie[0])
     position[8] = eval(cubie[2] + cubie[:2])
-    cubie = input("""
+    cubie = input(
+        """
     Now enter cubie #3, to the right of cubie #2:
-    cubie #3: """)
+    cubie #3: """
+    )
     position[9] = eval(cubie)
     position[10] = eval(cubie[1:] + cubie[0])
     position[11] = eval(cubie[2] + cubie[:2])
-    cubie = input("""
+    cubie = input(
+        """
     Now enter cubie #4, which is behind cubie #0. Start with the back
     face, and go clockwise:
-    cubie #4: """)
+    cubie #4: """
+    )
     position[12] = eval(cubie)
     position[13] = eval(cubie[1:] + cubie[0])
     position[14] = eval(cubie[2] + cubie[:2])
-    cubie = input("""
+    cubie = input(
+        """
     Now enter cubie #5, which is to the right of cubie #4:
-    cubie #5: """)
+    cubie #5: """
+    )
     position[15] = eval(cubie)
     position[16] = eval(cubie[1:] + cubie[0])
     position[17] = eval(cubie[2] + cubie[:2])
-    cubie = input("""
+    cubie = input(
+        """
     Now enter cubie #6, which is beneath cubie #4:
-    cubie #6: """)
+    cubie #6: """
+    )
     position[18] = eval(cubie)
     position[19] = eval(cubie[1:] + cubie[0])
     position[20] = eval(cubie[2] + cubie[:2])
     print("""We already know cubie #7, so we're done.""")
-    cubie = 'oyb'
+    cubie = "oyb"
     position[21] = eval(cubie)
     position[22] = eval(cubie[1:] + cubie[0])
     position[23] = eval(cubie[2] + cubie[:2])
 
     return tuple(position)
+
 
 if __name__ == "__main__":
     input_configuration()
