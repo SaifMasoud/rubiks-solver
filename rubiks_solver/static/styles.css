@@ -18,7 +18,7 @@
   }
 
   #up .rubiks-cubelet {
-    background-color: white;
+    background-color: yellow;
   }
 
   #left .rubiks-cubelet {
@@ -26,7 +26,7 @@
   }
 
   #front .rubiks-cubelet {
-    background-color: red;
+    background-color: orange;
   }
 
   #right .rubiks-cubelet {
@@ -34,11 +34,11 @@
   }
 
   #back .rubiks-cubelet {
-    background-color: orange;
+    background-color: red;
   }
 
   #down .rubiks-cubelet {
-    background-color: yellow;
+    background-color: white;
   }
 
   .rubiks-cube {

@@ -3,6 +3,7 @@
 # Modified: Michael Lieberman
 # Last updated: October 24, 2008
 # Updated for python3: Saif Masoud, September 2020
+# Modified for logo on WGR: Dec 2020
 # Routines to work with Rubik's 2x2x2 cube
 """
 We'll call the six sides, as usual:
@@ -43,63 +44,63 @@ facing down.
 # has a front face, a left face, and an upper face.
 # yob refers to the colors yellow, orange, blue that are on the
 # respective faces if the cube is in the solved position.
-rgw = flu = 0  # (0-th cubie; front face)
-gwr = luf = 1  # (0-th cubie; left face)
-wrg = ufl = 2  # (0-th cubie; up face)
+ogy = flu = 0  # (0-th cubie; front face)
+gyo = luf = 1  # (0-th cubie; left face)
+yog = ufl = 2  # (0-th cubie; up face)
 
-rwb = fur = 3  # (1-st cubie; front face)
-wbr = urf = 4  # (1-st cubie; up face)
-brw = rfu = 5  # (1-st cubie; right face)
+oyb = fur = 3  # (1-st cubie; front face)
+ybo = urf = 4  # (1-st cubie; up face)
+boy = rfu = 5  # (1-st cubie; right face)
 
-ryg = fdl = 6  # (2-nd cubie; front face)
-ygr = dlf = 7  # (2-nd cubie; down face)
-gry = lfd = 8  # (2-nd cubie; left face)
+owg = fdl = 6  # (2-nd cubie; front face)
+wgo = dlf = 7  # (2-nd cubie; down face)
+gow = lfd = 8  # (2-nd cubie; left face)
 
-rby = frd = 9  #  (3-rd cubie; front face)
-byr = rdf = 10  # (3-rd cubie; right face)
-yrb = dfr = 11  # (3-rd cubie; down face)
+obw = frd = 9  #  (3-rd cubie; front face)
+bwo = rdf = 10  # (3-rd cubie; right face)
+wob = dfr = 11  # (3-rd cubie; down face)
 
-owg = bul = 12  # (4-th cubie; back face)
-wgo = ulb = 13  # (4-th cubie; up face)
-gow = lbu = 14  # (4-th cubie; left face)
+ryg = bul = 12  # (4-th cubie; back face)
+ygr = ulb = 13  # (4-th cubie; up face)
+gry = lbu = 14  # (4-th cubie; left face)
 
-obw = bru = 15  # (5-th cubie; back face)
-bwo = rub = 16  # (5-th cubie; right face)
-wob = ubr = 17  # (5-th cubie; up face)
+rby = bru = 15  # (5-th cubie; back face)
+byr = rub = 16  # (5-th cubie; right face)
+yrb = ubr = 17  # (5-th cubie; up face)
 
-ogy = bld = 18  # (6-th cubie; back face)
-gyo = ldb = 19  # (6-th cubie; left face)
-yog = dbl = 20  # (6-th cubie; down face)
+rgw = bld = 18  # (6-th cubie; back face)
+gwr = ldb = 19  # (6-th cubie; left face)
+wrg = dbl = 20  # (6-th cubie; down face)
 
-oyb = bdr = 21  # (7-th cubie; back face)
-ybo = drb = 22  # (7-th cubie; down face)
-boy = rbd = 23  # (7-th cubie; right face)
+rwb = bdr = 21  # (7-th cubie; back face)
+wbr = drb = 22  # (7-th cubie; down face)
+brw = rbd = 23  # (7-th cubie; right face)
 
 three_color_to_index = {
-    "rgw": 0,
-    "gwr": 1,
-    "wrg": 2,
-    "rwb": 3,
-    "wbr": 4,
-    "brw": 5,
-    "ryg": 6,
-    "ygr": 7,
-    "gry": 8,
-    "rby": 9,
-    "byr": 10,
-    "yrb": 11,
-    "owg": 12,
-    "wgo": 13,
-    "gow": 14,
-    "obw": 15,
-    "bwo": 16,
-    "wob": 17,
-    "ogy": 18,
-    "gyo": 19,
-    "yog": 20,
-    "oyb": 21,
-    "ybo": 22,
-    "boy": 23,
+    "ogy": 0,
+    "gyo": 1,
+    "yog": 2,
+    "oyb": 3,
+    "ybo": 4,
+    "boy": 5,
+    "owg": 6,
+    "wgo": 7,
+    "gow": 8,
+    "obw": 9,
+    "bwo": 10,
+    "wob": 11,
+    "ryg": 12,
+    "ygr": 13,
+    "gry": 14,
+    "rby": 15,
+    "byr": 16,
+    "yrb": 17,
+    "rgw": 18,
+    "gwr": 19,
+    "wrg": 20,
+    "rwb": 21,
+    "wbr": 22,
+    "brw": 23,
 }
 
 rgb_to_one_char_color = {
