@@ -40,4 +40,5 @@ def rgb_arr_to_rubik_perm(rgb_arr):
     return tuple(perm)
 
 
-app.run("0.0.0.0")
+if __name__ == "__main__":
+    app.run("0.0.0.0")
