@@ -1,7 +1,7 @@
 
 
 rubi_index_to_rgb = {
-    0: "rgb(255, 165, 0)", // Red
+    0: "rgb(255, 165, 0)", // Orange
     3: "rgb(255, 165, 0)",
     6: "rgb(255, 165, 0)",
     9: "rgb(255, 165, 0)",
@@ -13,15 +13,15 @@ rubi_index_to_rgb = {
     8: "rgb(0, 255, 0)",
     14: "rgb(0, 255, 0)",
     19: "rgb(0, 255, 0)",
-    7: "rgb(255, 255, 255)", // Yellow
+    7: "rgb(255, 255, 255)", // White
     11: "rgb(255, 255, 255)",
     20: "rgb(255, 255, 255)",
     22: "rgb(255, 255, 255)",
-    2: "rgb(255, 255, 0)", // White
+    2: "rgb(255, 255, 0)", // Yellow
     4: "rgb(255, 255, 0)",
     13: "rgb(255, 255, 0)",
     17: "rgb(255, 255, 0)",
-    12: "rgb(255, 0, 0)", // Orange
+    12: "rgb(255, 0, 0)", // Red
     15: "rgb(255, 0, 0)",
     18: "rgb(255, 0, 0)",
     21: "rgb(255, 0, 0)",
@@ -29,6 +29,7 @@ rubi_index_to_rgb = {
 }
 
 // State/Globals
+const IDENTITY_PERM = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
 let parsed_data = {}
 let selectedColor = "";
 let rubik_config = [];
@@ -50,7 +51,18 @@ function main() {
 
     document.getElementById("prev_btn").addEventListener("click", draw_prev, false)
     document.getElementById("next_btn").addEventListener("click", draw_next, false)
+    document.getElementById("reset_btn").addEventListener("click", on_reset_btn, false)
+}
 
+function set_perm(perm) {
+    // draws perm and updates state
+    rubik_config_cur = 0
+    rubik_config = perm
+    draw_perm(rubik_config)
+}
+
+function on_reset_btn() {
+    set_perm(IDENTITY_PERM)
 }
 
 function draw_prev() {
@@ -96,8 +108,8 @@ function on_solve_btn() {
     postAjax("/", { colors_list: JSON.stringify(colors_list) }, function (data) {
         parsed_data = JSON.parse(data)
         rubik_config = parsed_data["rubik_configs"];
+        document.getElementById("twists_list").innerHTML = String(parsed_data["twists"])
     })
-    document.getElementById("twists_list").innerHTML = String(parsed_data["twists"])
     //    on_solve_btn() // For some reason it must be "pressed" twice to work (otherwise parsed_data doesnt fill)
 }
 
