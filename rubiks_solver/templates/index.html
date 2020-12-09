@@ -15,7 +15,7 @@
           <div class="rubiks-cubelet">1</div>
           <div class="rubiks-cubelet">2</div>
           <div class="rubiks-cubelet">3</div>
-          <div class="rubiks-cubelet">4</div>
+          <div class="rubiks-cubelet arrow_cubelet" id="upleft_arrow">4</div>
         </div>
         <div class="rubiks-face" id='up'>
           <div class="rubiks-cubelet" id='13'>1</div>
@@ -26,7 +26,7 @@
         <div class="rubiks-face blank">
           <div class="rubiks-cubelet">1</div>
           <div class="rubiks-cubelet">2</div>
-          <div class="rubiks-cubelet">3</div>
+          <div class="rubiks-cubelet arrow_cubelet" id="upright_arrow">3</div>
           <div class="rubiks-cubelet">4</div>
         </div>
         <div class="rubiks-face blank">
@@ -40,32 +40,32 @@
         <div class="rubiks-face leftFace" id="left">
           <div class="rubiks-cubelet" id='14'>1</div>
           <div class="rubiks-cubelet" id='1'>1</div>
-          <div class="rubiks-cubelet" id="19">3</div>
-          <div class="rubiks-cubelet" id="8">4</div>
+          <div class="rubiks-cubelet" id="19">1</div>
+          <div class="rubiks-cubelet" id="8">1</div>
         </div>
         <div class="rubiks-face frontFace" id="front">
-          <div class="rubiks-cubelet" id='0'>0</div>
-          <div class="rubiks-cubelet" id="3">2</div>
-          <div class="rubiks-cubelet" id="6">3</div>
-          <div class="rubiks-cubelet" id="9">4</div>
+          <div class="rubiks-cubelet" id='0'>1 </div>
+          <div class="rubiks-cubelet" id="3">1 </div>
+          <div class="rubiks-cubelet" id="6">1 </div>
+          <div class="rubiks-cubelet" id="9">1 </div>
         </div>
         <div class="rubiks-face rightFace" id="right">
           <div class="rubiks-cubelet" id="5">1</div>
-          <div class="rubiks-cubelet" id='16'>2</div>
-          <div class="rubiks-cubelet" id="10">3</div>
-          <div class="rubiks-cubelet" id='23'>4</div>
+          <div class="rubiks-cubelet" id='16'>1</div>
+          <div class="rubiks-cubelet" id="10">1</div>
+          <div class="rubiks-cubelet" id='23'>1</div>
         </div>
         <div class="rubiks-face backFace" id="back">
           <div class="rubiks-cubelet" id="15">1</div>
-          <div class="rubiks-cubelet" id="12">2</div>
-          <div class="rubiks-cubelet" id="21">3</div>
-          <div class="rubiks-cubelet" id="18">4</div>
+          <div class="rubiks-cubelet" id="12">1</div>
+          <div class="rubiks-cubelet" id="21">1</div>
+          <div class="rubiks-cubelet" id="18">1</div>
         </div>
       </div>
       <div class="bottom row">
         <div class="rubiks-face blank">
-          <div class="rubiks-cubelet" id=''>1</div>
-          <div class="rubiks-cubelet">2</div>
+          <div class="rubiks-cubelet">1</div>
+          <div class="rubiks-cubelet arrow_cubelet" id="downleft_arrow">2</div>
           <div class="rubiks-cubelet">3</div>
           <div class="rubiks-cubelet">4</div>
         </div>
@@ -73,10 +73,10 @@
           <div class="rubiks-cubelet" id="7">1</div>
           <div class="rubiks-cubelet" id="11">2</div>
           <div class="rubiks-cubelet" id="20">3</div>
-          <div class="rubiks-cubelet" id="22">LOGO</div>
+          <div class="rubiks-cubelet" id="22">L</div>
         </div>
         <div class="rubiks-face blank">
-          <div class="rubiks-cubelet">1</div>
+          <div class="rubiks-cubelet arrow_cubelet" id="downright_arrow"></div>
           <div class="rubiks-cubelet">2</div>
           <div class="rubiks-cubelet">3</div>
           <div class="rubiks-cubelet">4</div>
@@ -88,8 +88,9 @@
           <div class="rubiks-cubelet">4</div>
         </div>
       </div>
+      <div id="twists_list"></div>
     </div>
-    <div id="color_picker" style="size: 50%;">
+    <div id="color_picker">
       <button id="pick_r" style="background-color: red;">Y</button>
       <button id="pick_b" style="background-color: blue;">Y</button>
       <button id="pick_g" style="background-color: #00ff00;">Y</button>
@@ -97,12 +98,12 @@
       <button id="pick_y" style="background-color: yellow;">Y</button>
       <button id="pick_o" style="background-color: orange;">Y</button>
     </div>
-    <button id="prev_btn" class="btn btn-primary">Previous</button>
+    <button id="demo_btn" class="btn btn-primary">Demo</button>
     <button id="solve_btn" class="btn btn-primary">Solve</button>
+    <button id="prev_btn" class="btn btn-primary">Previous</button>
     <button id="next_btn" class="btn btn-primary">Next</button>
     <button id="reset_btn" class="btn btn-primary">Reset</button>
 
-    <p id="twists_list"></p>
   </div>
 </body>
-<script src="{{url_for('static', filename='index.js')}}"></script>
+<script type="module" src="{{url_for('static', filename='index.js')}}"></script>

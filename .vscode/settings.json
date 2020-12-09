@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "venv_rubiks_solver/bin/python",
+    "python.pythonPath": "C:\\Users\\saife\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe",
     "python.linting.flake8Enabled": false,
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,

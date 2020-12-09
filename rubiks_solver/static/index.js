@@ -1,32 +1,6 @@
+import { rubi_index_to_rgb } from "./helpers.js";
 
 
-rubi_index_to_rgb = {
-    0: "rgb(255, 165, 0)", // Orange
-    3: "rgb(255, 165, 0)",
-    6: "rgb(255, 165, 0)",
-    9: "rgb(255, 165, 0)",
-    5: "rgb(0, 0, 255)", // Blue
-    10: "rgb(0, 0, 255)",
-    16: "rgb(0, 0, 255)",
-    23: "rgb(0, 0, 255)",
-    1: "rgb(0, 255, 0)", // Green
-    8: "rgb(0, 255, 0)",
-    14: "rgb(0, 255, 0)",
-    19: "rgb(0, 255, 0)",
-    7: "rgb(255, 255, 255)", // White
-    11: "rgb(255, 255, 255)",
-    20: "rgb(255, 255, 255)",
-    22: "rgb(255, 255, 255)",
-    2: "rgb(255, 255, 0)", // Yellow
-    4: "rgb(255, 255, 0)",
-    13: "rgb(255, 255, 0)",
-    17: "rgb(255, 255, 0)",
-    12: "rgb(255, 0, 0)", // Red
-    15: "rgb(255, 0, 0)",
-    18: "rgb(255, 0, 0)",
-    21: "rgb(255, 0, 0)",
-
-}
 
 // State/Globals
 const IDENTITY_PERM = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
@@ -37,8 +11,6 @@ let rubik_config_cur = 0;
 
 function main() {
 
-    // TODO:
-    // Render given permutations(just a list of colors) & step back & forth.
     let solveBtn = document.getElementById("solve_btn")
     solveBtn.addEventListener("click", on_solve_btn, false)
 
@@ -52,6 +24,18 @@ function main() {
     document.getElementById("prev_btn").addEventListener("click", draw_prev, false)
     document.getElementById("next_btn").addEventListener("click", draw_next, false)
     document.getElementById("reset_btn").addEventListener("click", on_reset_btn, false)
+    document.getElementById("demo_btn").addEventListener("click", on_demo_btn, false)
+}
+
+function arrows() {
+    document.getElementById("downleft_arrow").style.backgroundImage = 'url(/static/60555.svg)'
+    // document.getElementById("downleft_arrow").style.backgroundSize = '100% 100%'
+    document.getElementById("downleft_arrow").style.visibility = 'visible'
+
+}
+
+function on_demo_btn() {
+    set_perm([2, 0, 1, 16, 17, 15, 9, 10, 11, 3, 4, 5, 7, 8, 6, 14, 12, 13, 18, 19, 20, 21, 22, 23]); on_solve_btn()
 }
 
 function set_perm(perm) {
@@ -81,7 +65,7 @@ function draw_next() {
 
 function on_cubelet_click(event) {
     let clickedElem = event.path[0]
-    // The last cubie, formed by cubelets 21,22,23 is the anchor. We dont change that
+    // The last cubie, formed by cubelets 21,22,23 is the anchor. We dont allow changing that
     if (selectedColor != "" && !(['21', '22', '23'].includes(clickedElem.id)))
         clickedElem.style.backgroundColor = selectedColor;
 }
@@ -100,17 +84,30 @@ function draw_perm(perm) {
 }
 function on_solve_btn() {
     console.log("Pressed Solve.")
+    let colors_list = read_colors()
+    postAjax("/", { colors_list: JSON.stringify(colors_list) }, function (data) {
+        parsed_data = JSON.parse(data)
+        rubik_config = parsed_data["rubik_configs"];
+        rubik_config_cur = 0;
+        write_twists()
+    })
+}
+
+function write_twists() {
+    let twists = parsed_data['twists']
+    let t_str = ""
+    for (let t of twists) {
+        t_str += String(t) + ' '
+    }
+    document.getElementById("twists_list").innerHTML = String(parsed_data["twists"])
+}
+
+function read_colors() {
     let colors_list = [];
     for (var i = 0; i < 24; i++) {
         colors_list.push(getComputedStyle(document.getElementById(String(i))).backgroundColor)
     }
-    console.log(colors_list)
-    postAjax("/", { colors_list: JSON.stringify(colors_list) }, function (data) {
-        parsed_data = JSON.parse(data)
-        rubik_config = parsed_data["rubik_configs"];
-        document.getElementById("twists_list").innerHTML = String(parsed_data["twists"])
-    })
-    //    on_solve_btn() // For some reason it must be "pressed" twice to work (otherwise parsed_data doesnt fill)
+    return colors_list
 }
 
 function postAjax(url, data, success) {
