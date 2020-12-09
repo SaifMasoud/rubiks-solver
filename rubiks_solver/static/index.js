@@ -64,14 +64,16 @@ function draw_next() {
 }
 
 function on_cubelet_click(event) {
-    let clickedElem = event.path[0]
+    let path = event.path || (event.composedPath && event.composedPath());
+    let clickedElem = path[0]
     // The last cubie, formed by cubelets 21,22,23 is the anchor. We dont allow changing that
     if (selectedColor != "" && !(['21', '22', '23'].includes(clickedElem.id)))
         clickedElem.style.backgroundColor = selectedColor;
 }
 
 function on_color_picker(event) {
-    let clickedElem = event.path[0];
+    let path = event.path || (event.composedPath && event.composedPath());
+    let clickedElem = path[0];
     selectedColor = getComputedStyle(clickedElem).backgroundColor
 }
 
