@@ -14,7 +14,12 @@
   min-width: 25%;
 }
 
+.row {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  padding: 1px;
 
+}
 
 .arrow_cubelet {
   background-size: 100% 100%; /* This makes background-image auto-resize to fit the div.*/
@@ -38,15 +43,10 @@
   padding: 20px;
 }
 
-.row {
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-  padding: 1px;
-}
 
 .fake_row {
   display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
   /* padding: .5px;
   min-width: 100%; */
 }

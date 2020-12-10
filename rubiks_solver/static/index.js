@@ -39,17 +39,10 @@ function arrows() {
         document.getElementById("left_arrow").style.backgroundImage = "url(/static/down_arrow.png)"
         document.getElementById("left_arrow").style.visibility = 'visible'
     }
-    else if (next_twist == 'F') {
-        var elems = document.getElementsByClassName("f_arrow")
+    else {
+        var elems = document.getElementsByClassName(next_twist + "_arrow")
         for (let elem of elems) {
-            elem.style.backgroundImage = "url(/static/f_arrow.png)"
-            elem.style.visibility = 'visible'
-        }
-    }
-    else if (next_twist == 'Fi') {
-        var elems = document.getElementsByClassName("f_arrow")
-        for (let elem of elems) {
-            elem.style.backgroundImage = "url(/static/fi_arrow.png)"
+            elem.style.backgroundImage = "url(/static/" + next_twist + "_arrow.png)"
             elem.style.visibility = 'visible'
         }
     }
@@ -77,6 +70,7 @@ function set_perm(perm) {
 function on_reset_btn() {
     set_perm(IDENTITY_PERM)
     parsed_data = {}
+    clear_arrows()
 }
 
 function draw_prev() {
@@ -127,6 +121,10 @@ function on_solve_btn() {
         write_twists()
         arrows()
     })
+    // If parsed_data doesn't have a solution, invalid input
+    if (!'twists' in parsed_data) {
+        document.getElementById("status").innerHTML = "Status: Invalid Input"
+    }
 }
 
 function write_twists() {
