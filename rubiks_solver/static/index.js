@@ -3,6 +3,7 @@ import { rubi_index_to_rgb } from "./helpers.js";
 
 // State/Globals
 const IDENTITY_PERM = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+const BASEPATH = "/static/arrows/"
 let parsed_data = {}
 let selectedColor = "";
 let rubik_config = [];
@@ -32,17 +33,17 @@ function arrows() {
     let next_twist = twists[rubik_config_cur]
 
     if (next_twist == "Li") {
-        document.getElementById("lefti_arrow").style.backgroundImage = "url(/static/up_arrow.png)"
+        document.getElementById("lefti_arrow").style.backgroundImage = "url(" + BASEPATH + "up_arrow.png)"
         document.getElementById("lefti_arrow").style.visibility = 'visible'
     }
     else if (next_twist == 'L') {
-        document.getElementById("left_arrow").style.backgroundImage = "url(/static/down_arrow.png)"
+        document.getElementById("left_arrow").style.backgroundImage = "url(" + BASEPATH + "down_arrow.png)"
         document.getElementById("left_arrow").style.visibility = 'visible'
     }
     else {
         var elems = document.getElementsByClassName(next_twist + "_arrow")
         for (let elem of elems) {
-            elem.style.backgroundImage = "url(/static/" + next_twist + "_arrow.png)"
+            elem.style.backgroundImage = "url(" + BASEPATH + next_twist + "_arrow.png)"
             elem.style.visibility = 'visible'
         }
     }
@@ -56,6 +57,7 @@ function clear_arrows() {
 }
 
 function on_demo_btn() {
+    on_reset_btn()
     set_perm([2, 0, 1, 16, 17, 15, 7, 8, 6, 20, 18, 19, 12, 13, 14, 3, 4, 5, 9, 10, 11, 21, 22, 23])
     on_solve_btn()
 }
@@ -68,6 +70,7 @@ function set_perm(perm) {
 }
 
 function on_reset_btn() {
+    document.getElementById("status").innerHTML = ""
     set_perm(IDENTITY_PERM)
     parsed_data = {}
     clear_arrows()
@@ -112,19 +115,20 @@ function draw_perm(perm) {
 }
 
 function on_solve_btn() {
+    document.getElementById("status").innerHTML = ""
     console.log("Pressed Solve.")
     let colors_list = read_colors()
     postAjax("/", { colors_list: JSON.stringify(colors_list) }, function (data) {
         parsed_data = JSON.parse(data)
+        // If parsed_data doesn't have a solution, invalid input
+        if (!('twists' in parsed_data)) {
+            document.getElementById("status").innerHTML = "Status: Invalid Input"
+        }
         rubik_config = parsed_data["rubik_configs"];
         rubik_config_cur = 0;
         write_twists()
         arrows()
     })
-    // If parsed_data doesn't have a solution, invalid input
-    if (!'twists' in parsed_data) {
-        document.getElementById("status").innerHTML = "Status: Invalid Input"
-    }
 }
 
 function write_twists() {

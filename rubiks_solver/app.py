@@ -11,14 +11,17 @@ app = Flask(__name__)
 def index():
     if request.method == "POST":
         colors = json.loads(request.form.get("colors_list"))
-        perm = rgb_arr_to_rubik_perm(colors)
-        twists = [
-            rubik.quarter_twists_names[t]
-            for t in bidirectional_bfs_search(perm)
-        ]
-        rubik_configs = rubik_list_states(perm)
-        print(twists)
-        return {"rubik_configs": rubik_configs, "twists": twists}
+        try:
+            perm = rgb_arr_to_rubik_perm(colors)
+            twists = [
+                rubik.quarter_twists_names[t]
+                for t in bidirectional_bfs_search(perm)
+            ]
+            rubik_configs = rubik_list_states(perm)
+            print(twists)
+            return {"rubik_configs": rubik_configs, "twists": twists}
+        except KeyError:  # invalid rubik's input
+            return {}
     return render_template("index.html")
 
 
