@@ -1,5 +1,5 @@
 #body {
-  width: 50%;
+  width: 40%;
 }
 
 #downleft_arrow{
@@ -14,8 +14,11 @@
   min-width: 25%;
 }
 
+
+
 .arrow_cubelet {
   background-size: 100% 100%; /* This makes background-image auto-resize to fit the div.*/
+  visibility: hidden;
 }
 #color_picker {
   display: grid;
@@ -26,6 +29,7 @@
 .inv {
   visibility: hidden;
 }
+
 
 .rubiks-cube {
   display: grid;
@@ -38,8 +42,13 @@
   display: grid;
   grid-template-columns: auto auto auto auto;
   padding: 1px;
-  max-width: 100%;
-  height: 33%;
+}
+
+.fake_row {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto;
+  /* padding: .5px;
+  min-width: 100%; */
 }
 
 .rubiks-cubelet {

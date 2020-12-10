@@ -10,6 +10,20 @@
 <body>
   <div id="body">
     <div class="rubiks-cube">
+      <div class="fake_row">
+        <div class="rubiks_cubelet arrow_cubelet">1</div>
+        <div class="rubiks_cubelet arrow_cubelet">2</div>
+        <div id="left_arrow" class="rubiks_cubelet arrow_cubelet">
+          <div class="inv">1</div>
+        </div>
+        <div class="rubiks_cubelet arrow_cubelet">1</div>
+        <div class="rubiks_cubelet arrow_cubelet">1</div>
+        <div class="rubiks_cubelet arrow_cubelet">1</div>
+        <div class="rubiks_cubelet arrow_cubelet">1</div>
+        <div class="rubiks_cubelet arrow_cubelet">1</div>
+
+
+      </div>
       <div class="top row">
         <div class="rubiks-face blank">
           <div class="rubiks-cubelet">1</div>
@@ -18,10 +32,18 @@
           <div class="rubiks-cubelet arrow_cubelet" id="upleft_arrow">4</div>
         </div>
         <div class="rubiks-face" id='up'>
-          <div class="rubiks-cubelet" id='13'> <div class="inv">1</div> </div>
-          <div class="rubiks-cubelet" id="17"> <div class="inv">1</div> </div>
-          <div class="rubiks-cubelet" id='2'> <div class="inv">1</div> </div>
-          <div class="rubiks-cubelet" id='4'> <div class="inv">1</div> </div>
+          <div class="rubiks-cubelet" id='13'>
+            <div class="inv">1</div>
+          </div>
+          <div class="rubiks-cubelet" id="17">
+            <div class="inv">1</div>
+          </div>
+          <div class="rubiks-cubelet" id='2'>
+            <div class="inv">1</div>
+          </div>
+          <div class="rubiks-cubelet" id='4'>
+            <div class="inv">1</div>
+          </div>
         </div>
         <div class="rubiks-face blank">
           <div class="rubiks-cubelet">1</div>
@@ -38,45 +60,85 @@
       </div>
       <div class="middle row">
         <div class="rubiks-face leftFace" id="left">
-          <div class="rubiks-cubelet" id='14'> <div class="inv">1</div> </div>
-          <div class="rubiks-cubelet" id='1'> <div class="inv">1</div> </div>
-          <div class="rubiks-cubelet" id="19"> <div class="inv">1</div> </div>
-          <div class="rubiks-cubelet" id="8"> <div class="inv">1</div> </div>
+          <div class="rubiks-cubelet" id='14'>
+            <div class="inv">1</div>
+          </div>
+          <div class="rubiks-cubelet" id='1'>
+            <div class="inv">1</div>
+          </div>
+          <div class="rubiks-cubelet" id="19">
+            <div class="inv">1</div>
+          </div>
+          <div class="rubiks-cubelet" id="8">
+            <div class="inv">1</div>
+          </div>
         </div>
         <div class="rubiks-face frontFace" id="front">
-          <div class="rubiks-cubelet" id='0'> <div class="inv">1</div> </div>
-          <div class="rubiks-cubelet" id="3"> <div class="inv">1</div> </div>
-          <div class="rubiks-cubelet" id="6"> <div class="inv">1</div> </div>
-          <div class="rubiks-cubelet" id="9"> <div class="inv">1</div> </div>
+          <div class="rubiks-cubelet" id='0'>
+            <div class="inv">1</div>
+          </div>
+          <div class="rubiks-cubelet" id="3">
+            <div class="inv">1</div>
+          </div>
+          <div class="rubiks-cubelet" id="6">
+            <div class="inv">1</div>
+          </div>
+          <div class="rubiks-cubelet" id="9">
+            <div class="inv">1</div>
+          </div>
         </div>
         <div class="rubiks-face rightFace" id="right">
-          <div class="rubiks-cubelet" id="5"> <div class="inv">1</div> </div>
-          <div class="rubiks-cubelet" id='16'> <div class="inv">1</div> </div>
-          <div class="rubiks-cubelet" id="10"> <div class="inv">1</div> </div>
-          <div class="rubiks-cubelet" id='23'> <div class="inv">1</div> </div>
+          <div class="rubiks-cubelet" id="5">
+            <div class="inv">1</div>
+          </div>
+          <div class="rubiks-cubelet" id='16'>
+            <div class="inv">1</div>
+          </div>
+          <div class="rubiks-cubelet" id="10">
+            <div class="inv">1</div>
+          </div>
+          <div class="rubiks-cubelet" id='23'>
+            <div class="inv">1</div>
+          </div>
         </div>
         <div class="rubiks-face backFace" id="back">
-          <div class="rubiks-cubelet" id="15"> <div class="inv">1</div> </div>
-          <div class="rubiks-cubelet" id="12"> <div class="inv">1</div> </div>
-          <div class="rubiks-cubelet" id="21"> <div class="inv">1</div> </div>
-          <div class="rubiks-cubelet" id="18"> <div class="inv">1</div> </div>
+          <div class="rubiks-cubelet" id="15">
+            <div class="inv">1</div>
+          </div>
+          <div class="rubiks-cubelet" id="12">
+            <div class="inv">1</div>
+          </div>
+          <div class="rubiks-cubelet" id="21">
+            <div class="inv">1</div>
+          </div>
+          <div class="rubiks-cubelet" id="18">
+            <div class="inv">1</div>
+          </div>
         </div>
       </div>
       <div class="bottom row">
         <div class="rubiks-face blank">
           <div class="rubiks-cubelet">1</div>
-          <div class="rubiks-cubelet arrow_cubelet" id="downleft_arrow">2</div>
+          <div class="rubiks-cubelet arrow_cubelet" id="downleft_arrow"></div>
           <div class="rubiks-cubelet">3</div>
           <div class="rubiks-cubelet">4</div>
         </div>
         <div class="rubiks-face downFace" id="down">
-          <div class="rubiks-cubelet" id="7"><div class="inv">1</div></div>
-          <div class="rubiks-cubelet" id="11"><div class="inv">1</div></div>
-          <div class="rubiks-cubelet" id="20"><div class="inv">1</div></div>
+          <div class="rubiks-cubelet" id="7">
+            <div class="inv">1</div>
+          </div>
+          <div class="rubiks-cubelet" id="11">
+            <div class="inv">1</div>
+          </div>
+          <div class="rubiks-cubelet" id="20">
+            <div class="inv">1</div>
+          </div>
           <div class="rubiks-cubelet" id="22">L</div>
         </div>
         <div class="rubiks-face blank">
-          <div class="rubiks-cubelet arrow_cubelet" id="downright_arrow"></div>
+          <div class="rubiks-cubelet arrow_cubelet f_arrow">
+            <div class="inv">1</div>
+          </div>
           <div class="rubiks-cubelet">2</div>
           <div class="rubiks-cubelet">3</div>
           <div class="rubiks-cubelet">4</div>
@@ -88,22 +150,53 @@
           <div class="rubiks-cubelet">4</div>
         </div>
       </div>
-      <div id="twists_list"></div>
+      <div class="fake_row">
+        <div class="rubiks_cubelet arrow_cubelet">1</div>
+        <div class="rubiks_cubelet arrow_cubelet">2</div>
+        <div id="lefti_arrow" class="rubiks_cubelet arrow_cubelet">
+          <div class="inv">1</div>
+        </div>
+        <div class="rubiks_cubelet arrow_cubelet">1</div>
+        <div class="rubiks_cubelet arrow_cubelet">1</div>
+        <div class="rubiks_cubelet arrow_cubelet">1</div>
+        <div class="rubiks_cubelet arrow_cubelet">1</div>
+        <div class="rubiks_cubelet arrow_cubelet">1</div>
+
+
+      </div>
     </div>
+
+
     <div id="color_picker">
-      <button id="pick_r" style="background-color: red;"> <div class="inv">1</div> </button>
-      <button id="pick_b" style="background-color: blue;"> <div class="inv">1</div> </button>
-      <button id="pick_g" style="background-color: #00ff00;"> <div class="inv">1</div> </button>
-      <button id="pick_w" style="background-color: white;"> <div class="inv">1</div> </button>
-      <button id="pick_y" style="background-color: yellow;"> <div class="inv">1</div> </button>
-      <button id="pick_o" style="background-color: orange;"> <div class="inv">1</div> </button>
+      <button id="pick_r" style="background-color: red;">
+        <div class="inv">1</div>
+      </button>
+      <button id="pick_b" style="background-color: blue;">
+        <div class="inv">1</div>
+      </button>
+      <button id="pick_g" style="background-color: #00ff00;">
+        <div class="inv">1</div>
+      </button>
+      <button id="pick_w" style="background-color: white;">
+        <div class="inv">1</div>
+      </button>
+      <button id="pick_y" style="background-color: yellow;">
+        <div class="inv">1</div>
+      </button>
+      <button id="pick_o" style="background-color: orange;">
+        <div class="inv">1</div>
+      </button>
     </div>
+
+
     <button id="demo_btn" class="btn btn-primary">Demo</button>
     <button id="solve_btn" class="btn btn-primary">Solve</button>
     <button id="prev_btn" class="btn btn-primary">Previous</button>
     <button id="next_btn" class="btn btn-primary">Next</button>
     <button id="reset_btn" class="btn btn-primary">Reset</button>
     <h4>Note: Rotate your physical cube so the logo matches with the (L) in the above cube.
+
+
   </div>
 </body>
 <script type="module" src="{{url_for('static', filename='index.js')}}"></script>

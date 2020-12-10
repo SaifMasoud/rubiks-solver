@@ -1,7 +1,6 @@
 import { rubi_index_to_rgb } from "./helpers.js";
 
 
-
 // State/Globals
 const IDENTITY_PERM = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
 let parsed_data = {}
@@ -28,14 +27,44 @@ function main() {
 }
 
 function arrows() {
-    document.getElementById("downleft_arrow").style.backgroundImage = 'url(/static/60555.svg)'
-    // document.getElementById("downleft_arrow").style.backgroundSize = '100% 100%'
-    document.getElementById("downleft_arrow").style.visibility = 'visible'
+    clear_arrows()
+    let twists = parsed_data["twists"]
+    let next_twist = twists[rubik_config_cur]
 
+    if (next_twist == "Li") {
+        document.getElementById("lefti_arrow").style.backgroundImage = "url(/static/up_arrow.png)"
+        document.getElementById("lefti_arrow").style.visibility = 'visible'
+    }
+    else if (next_twist == 'L') {
+        document.getElementById("left_arrow").style.backgroundImage = "url(/static/down_arrow.png)"
+        document.getElementById("left_arrow").style.visibility = 'visible'
+    }
+    else if (next_twist == 'F') {
+        var elems = document.getElementsByClassName("f_arrow")
+        for (let elem of elems) {
+            elem.style.backgroundImage = "url(/static/f_arrow.png)"
+            elem.style.visibility = 'visible'
+        }
+    }
+    else if (next_twist == 'Fi') {
+        var elems = document.getElementsByClassName("f_arrow")
+        for (let elem of elems) {
+            elem.style.backgroundImage = "url(/static/fi_arrow.png)"
+            elem.style.visibility = 'visible'
+        }
+    }
+}
+
+function clear_arrows() {
+    let arrow_elems = document.getElementsByClassName("arrow_cubelet") // Note, they are not all classed as cubelets (doesn't matter)
+    for (var i = 0; i < arrow_elems.length; i++) {
+        arrow_elems[i].style.visibility = 'hidden'
+    }
 }
 
 function on_demo_btn() {
-    set_perm([2, 0, 1, 16, 17, 15, 9, 10, 11, 3, 4, 5, 7, 8, 6, 14, 12, 13, 18, 19, 20, 21, 22, 23]); on_solve_btn()
+    set_perm([2, 0, 1, 16, 17, 15, 7, 8, 6, 20, 18, 19, 12, 13, 14, 3, 4, 5, 9, 10, 11, 21, 22, 23])
+    on_solve_btn()
 }
 
 function set_perm(perm) {
@@ -47,6 +76,7 @@ function set_perm(perm) {
 
 function on_reset_btn() {
     set_perm(IDENTITY_PERM)
+    parsed_data = {}
 }
 
 function draw_prev() {
@@ -54,6 +84,7 @@ function draw_prev() {
         rubik_config_cur -= 1
         draw_perm(rubik_config[rubik_config_cur])
     }
+    arrows()
 }
 
 function draw_next() {
@@ -61,6 +92,7 @@ function draw_next() {
         rubik_config_cur += 1
         draw_perm(rubik_config[rubik_config_cur])
     }
+    arrows()
 }
 
 function on_cubelet_click(event) {
@@ -84,6 +116,7 @@ function draw_perm(perm) {
         elem.style.backgroundColor = rubi_index_to_rgb[perm[i]];
     }
 }
+
 function on_solve_btn() {
     console.log("Pressed Solve.")
     let colors_list = read_colors()
@@ -102,7 +135,6 @@ function write_twists() {
     for (let t of twists) {
         t_str += String(t) + ' '
     }
-    document.getElementById("twists_list").innerHTML = String(parsed_data["twists"])
 }
 
 function read_colors() {
