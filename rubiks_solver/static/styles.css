@@ -23,28 +23,8 @@
   padding: 3px;
 }
 
-#up .rubiks-cubelet {
-  background-color: yellow;
-}
-
-#left .rubiks-cubelet {
-  background-color: rgb(0, 255, 0);
-}
-
-#front .rubiks-cubelet {
-  background-color: orange;
-}
-
-#right .rubiks-cubelet {
-  background-color: blue;
-}
-
-#back .rubiks-cubelet {
-  background-color: red;
-}
-
-#down .rubiks-cubelet {
-  background-color: white;
+.inv {
+  visibility: hidden;
 }
 
 .rubiks-cube {
@@ -72,4 +52,28 @@
 
 .rubiks-face.blank {
   visibility: hidden;
+}
+
+#up .rubiks-cubelet {
+  background-color: yellow;
+}
+
+#left .rubiks-cubelet {
+  background-color: rgb(0, 255, 0);
+}
+
+#front .rubiks-cubelet {
+  background-color: orange;
+}
+
+#right .rubiks-cubelet {
+  background-color: blue;
+}
+
+#back .rubiks-cubelet {
+  background-color: red;
+}
+
+#down .rubiks-cubelet {
+  background-color: white;
 }

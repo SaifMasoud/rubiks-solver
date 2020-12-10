@@ -92,6 +92,7 @@ function on_solve_btn() {
         rubik_config = parsed_data["rubik_configs"];
         rubik_config_cur = 0;
         write_twists()
+        arrows()
     })
 }
 
